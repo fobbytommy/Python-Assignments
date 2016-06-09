@@ -29,6 +29,6 @@ def usersList():
 	for key, data in users.items():
 		print key
 		for name in data:
-			print data.index(name)+1, name['first_name'], name['last_name'], "-", len(name['first_name'])+len(name['last_name'])
+			print data.index(name)+1, "-", name['first_name'], name['last_name'], "-", len(name['first_name'])+len(name['last_name'])
 
 usersList()
