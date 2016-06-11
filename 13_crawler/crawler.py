@@ -12,7 +12,7 @@ url = 'http://www.codingdojo.com'
 soup = BeautifulSoup(urlopen(url), 'html.parser')
 
 
-# Part I: getting all links
+# Part I: getting all links in a list container
 hrefList = []
 for link in soup.find_all('a'):
 	hrefList.append(str(link.get('href')))
@@ -20,14 +20,14 @@ for link in soup.find_all('a'):
 # pprint.pprint(hrefList)
 
 
-# Part II
+# Part II: find 'http...' links and count the number of times mentioned in a page
 import re	# regular expression will be used to find address starting 'http...'
 hrefDict = {}	# empty dictionary
 for data in hrefList:
 	match = re.search(r'http', data)
-	# if we find a value that starts from 'http...',
+	# if we find a value from the list that starts from 'http...',
 	if match:
-		# and if this value has been already in the dictionary as a key,
+		# and if this value has been added already in the dictionary as a 'key',
 		if hrefDict.has_key(data):
 			# then just increment its dictionary value by 1
 			hrefDict[data] += 1
