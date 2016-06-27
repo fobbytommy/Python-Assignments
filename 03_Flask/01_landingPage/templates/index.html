@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Shadow Masters!</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+		<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<h1>Welcome to Shadow Masters!</h1>
+			<img class='symbol' src="{{ url_for('static', filename='img/symbol.png') }}" alt="symbol">
+			<nav>
+				<ul>
+					<li><a href="/ninjas">List of ninjas</a></li>
+					<li><a href="/dojos/new">Want to be one of us?</a></li>
+				</ul>
+			</nav>
+
+		</div>
+	</body>
+</html>

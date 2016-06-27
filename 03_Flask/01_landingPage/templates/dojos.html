@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Sign Up</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+	</head>
+	<body>
+		<div id="wrapper">
+			<h2>Sign up to be Shadow Masters</h2>
+			<form>
+				<p>
+					<label for='first_name'>First Name:</label>
+					<input type="text" id="first_name" name="first_name">
+					<label for='last_name'>Last Name:</label>
+					<input type="text" id="last_name" name="last_name">
+				</p>
+				<p>
+					<label for="email">Email Address:</label>
+					<input type="email" id="email" name="email">
+				</p>
+				<p>
+					<label for="phone">Phone: </label>
+					<input type="tel" id="phone" name="phone">
+				</p>
+				<p>Choose a Type of Shadow Master:</p>
+				<p>
+					<label>
+						<input type="radio" name="type" value="scout">Scout
+					</label>
+					<label>
+						<input type="radio" name="type" value="ranger">Ranger
+					</label>
+					<label>
+						<input type="radio" name="type" value="spy">Spy
+					</label>
+				</p>
+				<p>Describe Any Skills</p>
+				<textarea rows="8" name="description"></textarea>
+				<p>
+					<input type="submit" value="YOLO">
+				</p>
+			</form>
+			<footer class="footer_new">
+				<p><a href="/">Main Page</a></p>
+			</footer>
+		</div>
+	</body>
+</html>
