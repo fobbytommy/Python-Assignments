@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Dojo Survery Index</title>
+	</head>
+	<body>
+		<div id='wrapper'>
+			<form action='/result' method='post'>
+				<p>Your Name: <input type='text' name='name'></p>
+				<p>
+					Dojo Location: 
+					<select name='location'>
+						<option>East Coast</option>
+						<option>Los Angeles</option>
+						<option>San Jose</option>
+						<option>Seattle</option>
+						<option>Online</option>
+					</select>
+				</p>
+				<p>
+					Favorite Language: 
+					<select name='language'>
+						<option>Javascript</option>
+						<option>HTML/CSS</option>
+						<option>Python</option>
+						<option>PHP</option>
+						<option>C++</option>
+					</select>
+				</p>
+				<p>Comment (optional):</p>
+				<p><textarea name='comment'></textarea></p>
+				<p><input type='submit' value='Submit!'></p>
+			</form>
+		</div>
+</html>
