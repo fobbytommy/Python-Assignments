@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Counter</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css') }}">
+	</head>
+	<body>
+		<div id='wrapper'>
+			<h1>Counter</h1>
+			<h3><span class='count'>{{ session['count'] }}</span> times</h3>
+			<button><a href="/ninja">Ninja</a></button>
+			<button><a href="/hacker">Hacker</a></button>
+			<p>When the 'Ninja' button is clicked, the count jumps twice.</p>
+			<p>When the 'Hacker' button is clicked, the count resets to 1.</p>
+			<p>When the page is reloaded, the count goes up once.</p>
+		</div>
+	</body>
+</html>
