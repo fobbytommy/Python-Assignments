@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Great Number Game</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('form').submit(function(){
+					var guessNum = $('#guess').val();
+
+					if (guessNum == ''){ // if guess is empty
+						alert('Please guess a number between 1 and 100!');
+						return false;
+					} else if (guessNum > 100){ // if guess is higher than 100
+						alert('foo, read the instruction. Not over 100!');
+						return false;
+					} else if (guessNum < 1){ // if guess is lower than 1
+						alert('foo, read the instruction. Higher than 0!');
+						return false;
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id='wrapper'>
+			<h1>Welcome to the Great Number Game!</h1>
+			<h3>I am thinking of a number between 1 and 100</h3>
+			<h3>Take a guess!</h3>
+			<!-- if 'guess' was higher than the picked random number, -->
+			{% if session['optionNum'] == 1 %}
+				<div class='red'><h2>Too High!</h2></div>
+				<form action='/check' method='post'>
+					<!-- <p>randomly picked number = {{ session['randomNum'] }}</p> -->
+					<p><input type='number' name='guess' id='guess'></p>
+					<p><input class='button' type='submit' value='Guess again!'></p>
+				</form>
+			<!-- if 'guess' was lower than the picked random number, -->
+			{% elif session['optionNum'] == 2 %}
+				<div class='red'><h2>Too Low!</h2></div>
+				<form action='/check' method='post'>
+					<!-- <p>randomly picked number = {{ session['randomNum'] }}</p> -->
+					<p><input type='number' name='guess' id='guess'></p>
+					<p><input class='button' type='submit' value='Guess again!'></p>
+				</form>
+			<!-- if 'guess' was equal to the picked random number, -->
+			{% elif session['optionNum'] == 3 %}
+				<div class='green'>
+					<h2>{{ session['randomNum'] }} was the number!</h2>
+					<form action='/reset' method='post'>
+						<!-- <p>randomly picked number = {{ session['randomNum'] }}</p> -->
+						<p><input class='button' type='submit' value='Play again!'></p>
+					</form>
+				</div>
+			<!-- for initial set-up or after reset -->
+			{% else %}
+				<form action='/check' method='post'>
+					<p><input type='number' name='guess' id='guess'></p>
+					<p><input class='button' type='submit' value='Guess!'></p>
+				</form>
+			{% endif %}
+		</div><!-- end of #wrapper -->
+	</body>
+</html>
