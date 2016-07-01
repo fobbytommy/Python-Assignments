@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Dojo Survery Index</title>
+	</head>
+	<body>
+		<div id='wrapper'>
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<ul>
+						{% for message in messages %}
+							<li>{{ message }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			{% endwith %}
+			<form action='/process' method='post'>
+				<p>Your Name: <input type='text' name='name' id='name'></p>
+				<p>
+					Dojo Location:
+					<select name='location' id='location'>
+						<option value="" selected="selected">Make a choice</option>
+						<option>East Coast</option>
+						<option>Los Angeles</option>
+						<option>San Jose</option>
+						<option>Seattle</option>
+						<option>Online</option>
+					</select>
+				</p>
+				<p>
+					Favorite Language:
+					<select name='language' id='language'>
+						<option value="" selected="selected">Make a choice</option>
+						<option>Javascript</option>
+						<option>HTML/CSS</option>
+						<option>Python</option>
+						<option>PHP</option>
+						<option>C++</option>
+					</select>
+				</p>
+				<p>Comment:</p>
+				<p><textarea name='comment' id='comment'></textarea></p>
+				<p><input type='submit' value='Submit!'></p>
+			</form>
+		</div>
+		<script type="text/javascript">
+			document.getElementById('name').value = "{{ session['name'] }}";
+			document.getElementById('location').value = "{{ session['location'] }}";
+			document.getElementById('language').value = "{{ session['language'] }}";
+			document.getElementById('comment').value = "{{ session['comment'] }}";
+		</script>
+</html>
