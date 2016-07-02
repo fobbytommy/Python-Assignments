@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Registration Form</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	</head>
+	<body>
+		<div id='wrapper'>
+			<h2>Registeration!</h2>
+			<!-- messages to show either errors or confirmation of the form submission -->
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+					<ul class='flashes'>
+					{% for category, message in messages %}
+						<li class="{{ category }}">{{ message }}</li>
+					{% endfor %}
+					</ul>
+				{% endif %}
+			{% endwith %}
+			<form action='/process' method='POST'>
+				<p>
+					<label for='email'>Email:</label>
+					<input type='email' name='email' id='email' placeholder='gg@gmail.com'>
+				</p>
+				<p>
+					<label for='first_name'>First Name:</label>
+					<input type='text' name='first_name' id='first_name' placeholder='Tommy'>
+				</p>
+				<p>
+					<label for='last_name'>Last Name:</label>
+					<input type='text' name='last_name' id='last_name' placeholder='Oh'>
+				</p>
+					<p>
+					<label for='birthday'>Date of Birth:</label>
+					<input type='date' name='birthday' id='birthday' min='1900-01-01'>
+				</p>
+				<p>
+					<label for='password'>Password:</label>
+					<input type='password' name='password' id='password'>
+				</p>
+				<p>
+					<label for='confirm_password'>Confirm Password:</label>
+					<input type='password' name='confirm_password' id='confirm_password'>
+				</p>
+				<p><input type='submit' value='Process!'></p>
+			</form><!-- end of form -->
+		</div><!-- end of #wrapper -->
+		<script type="text/javascript">
+			// For the purpose of avoiding user to retype the information again
+			// after invalidation.
+			document.getElementById('email').value = "{{ session['email'] }}";
+			document.getElementById('first_name').value = "{{ session['first_name'] }}";
+			document.getElementById('last_name').value = "{{ session['last_name'] }}";
+			document.getElementById('birthday').value = "{{ session['birthday'] }}";
+		</script><!-- end of script -->
+	</body>
+</html>

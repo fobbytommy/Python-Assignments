@@ -1,0 +1,21 @@
+#wrapper {
+	width: 820px;
+	margin: 0 auto;
+}
+img {
+	width: 200px;
+	height: 300px;
+	border: 1px solid black;
+}
+h1, h3 {
+	text-align: center;
+	margin-bottom: 5px;
+}
+p {
+	text-align: center;
+	margin-top: 5px;
+}
+section {
+	width: 202px;
+	display: inline-block;
+}

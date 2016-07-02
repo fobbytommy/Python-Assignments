@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Disappearing Ninjas</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	</head>
+	<body>
+		<div id='wrapper'>
+			{% if ninja == 'all' %}
+				<section>
+					<h3>Leonardo</h3>
+					<img src="{{ url_for('static', filename='img/leonardo.jpg') }}" alt="Leonardo">
+					<p><a href="/ninja/blue">/ninja/blue</a></p>
+				</section>
+				<section>
+					<h3>Michelangelo</h3>
+					<img src="{{ url_for('static', filename='img/michelangelo.jpg') }}" alt='Michelangelo'>
+					<p><a href="/ninja/orange">/ninja/orange</a></p>
+				</section>
+				<section>
+					<h3>Raphael</h3>
+					<img src="{{ url_for('static', filename='img/raphael.jpg') }}" alt="Raphael">
+					<p><a href="/ninja/red">/ninja/red</a></p>
+				</section>
+				<section>
+					<h3>Donatello</h3>
+					<img src="{{ url_for('static', filename='img/donatello.jpg') }}" alt="Donatello">
+					<p><a href="/ninja/purple">/ninja/purple</a></p>
+				</section>
+			{% elif ninja == 'blue' %}
+				<section>
+					<h3>Leonardo</h3>
+					<img src="{{ url_for('static', filename='img/leonardo.jpg') }}" alt="Leonardo">
+					<p><a href="/">Back to Main</a></p>
+				</section>
+			{% elif ninja == 'orange' %}
+				<section>
+					<h3>Michelangelo</h3>
+					<img src="{{ url_for('static', filename='img/michelangelo.jpg') }}" alt='Michelangelo'>
+					<p><a href="/">Back to Main</a><p>
+				</section>
+			{% elif ninja == 'red' %}
+				<section>
+					<h3>Raphael</h3>
+					<img src="{{ url_for('static', filename='img/raphael.jpg') }}" alt="Raphael">
+					<p><a href="/">Back to Main</a><p>
+				</section>
+			{% elif ninja == 'purple' %}
+				<section>
+					<h3>Donatello</h3>
+					<img src="{{ url_for('static', filename='img/donatello.jpg') }}" alt="Donatello">
+					<p><a href="/">Back to Main</a><p>
+				</section>
+			{% else %}
+				<section>
+					<h3>April O'Neil</h3>
+					<img src="{{ url_for('static', filename='img/notapril.jpg') }}" alt="April O'Neil">
+					<p><a href="/">Back to Main</a><p>
+				</section>
+			{% endif %}
+		</div><!-- end of #wrapper -->
+	</body>
+</html>
