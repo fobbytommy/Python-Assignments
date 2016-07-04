@@ -1,0 +1,73 @@
+#wrapper {
+	width: 470px;
+	margin: 50px auto;	
+	background-color: skyblue;
+	padding: 30px;
+	border-radius: 30px;
+}
+#email {
+	width: 335px;
+	font-family: verdana, sans-serif;
+	font-size: 1.1em;
+	color: purple;
+	top: 30px;
+}
+#submit {
+	padding: 7px 15px;
+	font-family: verdana, sans-serif;
+	font-weight: 600;
+	font-size: 0.98em;
+	margin-left: 370px;
+}
+#delete {
+	padding: 6px 13px;
+	font-family: verdana, sans-serif;
+	font-weight: 600;
+	font-size: 0.70em;
+	vertical-align: top;
+}
+#email_id {
+	width: 35px;
+	font-family: verdana, sans-serif;
+	font-size: 1.1em;
+	color: purple;
+	top: 30px;
+}
+p {
+	font-family: verdana, sans-serif;
+
+
+}
+table {
+	margin-left: 20px;
+	word-wrap: break-word;
+	width: 470px;
+}
+th {
+	text-align: left;
+}
+.error {
+	font-family: verdana, sans-serif;
+	color: red;
+	font-weight: 700;
+	text-align: center;
+}
+.success {
+	font-family: verdana, sans-serif;
+	color: green;
+	font-weight: 700;
+	text-align: center;
+}
+.delete {
+	font-family: verdana, sans-serif;
+	color: blue;
+	font-weight: 700;
+	text-align: center;
+}
+#reset{
+	padding: 7px 15px;
+	font-family: verdana, sans-serif;
+	font-weight: 600;
+	font-size: 0.98em;
+	margin-left: 320px;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+	</head>
+	<body>
+		<div id='wrapper'>
+			{% with messages = get_flashed_messages(with_categories=True) %}
+				{% if messages %}
+					{% for category, message in messages %}
+						<p class='{{ category }}'>{{ message }}</p>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+			<table>
+				<thead>
+					<tr>
+						<th>ID Number</th>
+						<th>Email Adress</th>
+						<th>Added Date</th>
+					</tr>
+				<tbody>
+					{% for email in all_emails %}
+					<tr>
+						<td>{{ email['id'] }}</td>
+						<td>{{ email['email'] }}</td>
+						<td>{{ email['add_date'] }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<h3>If you wish to delete an email, please type its ID Number below:</h3>
+			<form action='/delete_email' method='POST'>
+				<p>
+					<label for='email_id'>ID Number: </label>
+					<input type='text' name='email_id' id='email_id'>
+					<input type='submit' value='Delete' id='delete'>
+				</p>
+			</form>
+			<form action='/reset' method='POST'>
+				<p><input type='submit' value='Back to Main' id='reset'></p>
+			</form>
+		</div><!-- end of #index_wrapper -->
+		<script type="text/javascript">
+			document.getElementById('email').value = "{{ session['email'] }}";
+		</script>
+	</body>
+</html>
