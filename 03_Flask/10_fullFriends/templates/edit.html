@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Hello Friends</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+	</head>
+	<body>
+		<div id='wrapper'>
+			<header>
+				<h1>UPDATE YOUR FRIEND!</h1>
+				<p>Current Information:</p>
+			</header>
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+				<ul>
+				{% for category, message in messages %}
+					<li class="{{ category }}">{{ message }}</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+			{% endwith %}
+			<table>
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Occupation</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{ one_friend['first_name'] }}</td>
+						<td>{{ one_friend['last_name'] }}</td>
+						<td>{{ one_friend['occupation'] }}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<form action="/friends/{{ one_friend['id'] }}" method="POST">
+							<td><input type='text' name='first_name' id='first_name'></td>
+							<td><input type='text' name='last_name' id='last_name'></td>
+							<td><input type='text' name='occupation' id='occupation'></td>
+							<td><input type='submit' value='Edit' id='edit'></td>
+						</form>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<form action="/">
+				<input type="submit" value="Go Back w/o any changes">
+				</form>
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		document.getElementById('first_name').value = "{{ session['first_name'] }}";
+		document.getElementById('last_name').value = "{{ session['last_name'] }}";		
+		document.getElementById('occupation').value = "{{ session['occupation'] }}";		
+	</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Hello Friends</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+	</head>
+	<body>
+		<div id='wrapper'>
+			<header>
+				<h1>I HAVE FRIENDS!</h1>
+				<p>See the list of my friends!</p>
+			</header>
+			<table>
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Occupation</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for friend in all_friends: %}
+					<tr>
+						<td>{{ friend['first_name'] }}</td>
+						<td>{{ friend['last_name'] }}</td>
+						<td>{{ friend['occupation'] }}</td>
+						<td>
+							<form action="/friends/{{ friend['id'] }}/edit">
+								<input type="submit" value="Edit">
+							</form>	
+						</td>
+						<td>
+							<form action="/friends/{{ friend['id'] }}/delete" method="POST">
+								<input type="submit" value="Delete">
+							</form>	
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			<section>
+				{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+					<ul>
+						{% for category, message in messages %}
+							<li class="{{ category }}">{{ message }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				{% endwith %}
+				<h3>Add a New Friend:</h3>
+				<form action="/friends" method="POST">
+					<label for='first_name'>First Name:</label>
+					<input type='text' name='first_name' id='first_name'>
+					<label for='last_name'>Last Name:</label>
+					<input type='text' name='last_name' id='last_name'>
+					<label for='occupation'>Occupation</label>
+					<input type='text' name='occupation' id='occupation'>
+					<input type='submit' value='Add' id='add'>
+				</form>
+			</section>
+		</div>
+	</body>
+	<script type="text/javascript">
+		document.getElementById('first_name').value = "{{ session['first_name'] }}";
+		document.getElementById('last_name').value = "{{ session['last_name'] }}";		
+		document.getElementById('occupation').value = "{{ session['occupation'] }}";		
+	</script>
+</html>
