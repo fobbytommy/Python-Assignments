@@ -68,17 +68,17 @@ def update(id):
 	if str.isalpha(str(session['first_name'])) == False and str(session['first_name']) != "":
 		errors.append("No symbols or numbers are allowed as a first name!")
 	elif len(session['first_name']) > 1:
-		query = "UPDATE friends SET first_name = :first_name WHERE id = :id"
+		query = "UPDATE friends SET first_name = :first_name, updated_at = NOW() WHERE id = :id"
 		data = { 'first_name': str(session['first_name']), 'id': id}
 		mysql.query_db(query, data)
 	if str.isalpha(str(session['last_name'])) == False and str(session['last_name']) != "":
 		errors.append("No symbols or numbers are allowed as a last name!")
 	elif len(session['last_name']) > 1:
-		query = "UPDATE friends SET last_name = :last_name WHERE id = :id"
+		query = "UPDATE friends SET last_name = :last_name, updated_at = NOW() WHERE id = :id"
 		data = { 'last_name': str(session['last_name']), 'id': id}
 		mysql.query_db(query, data)
 	if len(session['occupation']) > 1:
-		query = "UPDATE friends SET occupation = :occupation WHERE id = :id"
+		query = "UPDATE friends SET occupation = :occupation, updated_at = NOW()  WHERE id = :id"
 		data = { 'occupation': str(session['occupation']), 'id': id}
 		mysql.query_db(query, data)
 
