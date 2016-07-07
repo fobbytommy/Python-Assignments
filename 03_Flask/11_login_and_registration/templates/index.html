@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Login and Registration</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}" />
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+	<script>
+		 $(function() {
+		 	// http://stackoverflow.com/questions/4299435/remember-which-tab-was-active-after-refresh
+		    //  jQueryUI 1.10 and HTML5 ready
+		    //      http://jqueryui.com/upgrade-guide/1.10/#removed-cookie-option 
+		    //  Documentation
+		    //      http://api.jqueryui.com/tabs/#option-active
+		    //      http://api.jqueryui.com/tabs/#event-activate
+		    //      http://balaarjunan.wordpress.com/2010/11/10/html5-session-storage-key-things-to-consider/
+		    //
+		    //  Define friendly index name
+		    var index = 'key';
+		    //  Define friendly data store name
+		    var dataStore = window.sessionStorage;
+		    //  Start magic!
+		    try {
+		        // getter: Fetch previous value
+		        var oldIndex = dataStore.getItem(index);
+		    } catch(e) {
+		        // getter: Always default to first tab in error state
+		        var oldIndex = 0;
+		    }
+		    $('#tabs').tabs({
+		        // The zero-based index of the panel that is active (open)
+		        active : oldIndex,
+		        // Triggered after a tab has been activated
+		        activate : function( event, ui ){
+		            //  Get future value
+		            var newIndex = ui.newTab.parent().children().index(ui.newTab);
+		            //  Set future value
+		            dataStore.setItem( index, newIndex ) 
+		        }
+		    }); 
+	    }); 
+  	</script>
+  	<style type="text/css">
+  		#tabs{
+  			width: 275px;
+  		}
+  	</style>
+</head>
+<body>
+	<div id='wrapper'>
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">Login</a></li>
+				<li><a href="#tabs-2">Register</a></li>
+			</ul>
+			<div id="tabs-1">
+				<h4>Welcome Back!</h4>
+				<form action='/process' method='POST'>
+					<input type="hidden" name="process" value="login">
+					<p><input type="email" name="login_email" id="login_email" placeholder="Email"></p>
+					<p><input type="password" name="password" id="password" placeholder="Password"></p>
+					<p><input type="submit" value="LOGIN"></p>
+				</form>
+				{% with messages = get_flashed_messages(category_filter=["login_error"]) %}
+					{% if messages %}
+						{% for message in messages %}
+							<p class="message">{{ message }}</p>	
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+			</div>
+			<div id="tabs-2">
+				<h4>Sign up now!</h4>
+				<form action='/process' method='POST'>
+					<input type="hidden" name="process" value="register">
+					<p><input type="first_name" name="first_name" id="first_name" placeholder="First Name"></p>
+					<p><input type="last_name" name="last_name" id="last_name" placeholder="Last Name"></p>
+					<p><input type="email" name="register_email" id="register_email" placeholder="Email"></p>
+					<p><input type="password" name="password" id="password" placeholder="Password"></p>
+					<p><input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password"></p>
+					<p><input type="submit" value="REGISTER"></p>
+				</form>
+				{% with messages = get_flashed_messages(category_filter=["register_error"]) %}
+					{% if messages %}
+						{% for message in messages %}
+							<p class="message">{{ message }}</p>	
+						{% endfor %}
+					{% endif %}
+				{% endwith %}				
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		document.getElementById('login_email').value = "{{ session['login_email'] }}";
+		document.getElementById('first_name').value = "{{ session['first_name'] }}";
+		document.getElementById('last_name').value = "{{ session['last_name'] }}";
+		document.getElementById('register_email').value = "{{ session['register_email'] }}";
+	</script>
+</body>
+</html>
