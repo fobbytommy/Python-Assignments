@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Welcome</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+	<div id='wrapper'>
+		<header>
+			<h1>CodingDojo Wall</h1>
+			<h2>Welcome {{ user['first_name'] }}</h2>
+			<form action="/log_off", method="POST">
+				<input type="submit" value="log off" id="log_off_button">				
+			</form>
+		</header>
+		<div id='main_content'>
+			<form action="/add_message/{{ user['id'] }}" method="POST">
+				<h3><label for="message">Post a message</label></h3>
+				<textarea name="message" id="message"></textarea>
+				<input type="submit" value="Post a Message" id="message_button">				
+			</form>
+			{% if messages %}
+				{% for message in messages %}
+					<section class='message'>
+						<h3>{{ message['name_and_date'] }}<h3>
+						<p>{{ message['message'] }}</p>
+					</section>
+					<section class='comment'>
+					{% if comments %}
+						{% for comment in comments %}
+							{% if message['id'] == comment['message_id'] %}
+								<h3>{{ comment['name_and_date'] }}<h3>
+								<p>{{ comment['comment'] }}</p>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+						<h3>Post a comment</h3>
+						<form action="/add_comment/{{ message['id'] }}/{{ user['id'] }}" method="POST">
+							<textarea name="comment" id="comment"></textarea>
+							<input type="submit" value="Post a Comment" id="comment_button">			
+						</form>
+					</section>
+
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+</body>
+</html>
