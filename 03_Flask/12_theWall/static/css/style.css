@@ -1,11 +1,99 @@
-// header {
-// 	position: fixed;
-// 	// bottom: 0;
-//  //    right: 0;
-//  //    width: 300px;
-//  //    border: 3px solid #73AD21;
-// }
 
+#wrapper_wall {
+	width: 1100px;
+	margin: 0 auto;
+	padding: 30px;
+	background-color: orange;
+}
+#wrapper_index {
+	width: 275px;
+	margin: 0 auto;
+	padding: 30px;
+	
+}
+#tabs{
+  	width: 100%;
+ }
 .comment {
-	margin-left: 50px;
+	margin-left: 70px;
+	background-color: yellow;
+	border: 1px solid red;
+	padding: 10px 20px;
+}
+.post_comment{
+	margin-left: 70px;
+	background-color: skyblue;
+	border: 1px solid purple;
+	padding: 10px 20px;
+}
+.message{
+	background-color: green;
+	border: 1px solid blue;
+	padding: 10px 20px;
+}
+textarea{
+	width: 500px;
+	height: 100px;
+	font-size: 1.3em;
+}
+#main_content{
+	margin-top:  80px;
+	padding-bottom: 60px;
+}
+#footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   padding-bottom: 30px;
+   padding-left: 40px;
+   font-weight: 700;
+   font-family: verdana, sans-serif;
+   background-color:#999;
+}
+#footer p{
+	color: red;
+}
+.message h3, .comment h3{
+	display: inline-block;
+}
+.message form, .comment form {
+	display: inline-block;
+}
+.delete_button, #log_off_button, .post_button {
+	padding: 5px 8px;
+	font-family: verdana, sans-serif;
+	font-size: .8em;
+}
+
+.post_button{
+	display: block;
+	margin-left: 380px;
+	margin-bottom: 10px;
+}
+header {
+	background-color: violet;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width:100%;
+}
+header form{
+	display: inline-block;
+	float: right;
+	margin: 30px;
+}
+header h1{
+	display: inline-block;
+	float: left;
+	margin: 30px;
+}
+header h2{
+	display: inline-block;
+	float: right;
+	margin: 30px;
+} 
+.check_message {
+	color: red;
 }

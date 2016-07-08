@@ -6,45 +6,71 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
-	<div id='wrapper'>
+	<div id='wrapper_wall'>
 		<header>
 			<h1>CodingDojo Wall</h1>
-			<h2>Welcome {{ user['first_name'] }}</h2>
 			<form action="/log_off", method="POST">
 				<input type="submit" value="log off" id="log_off_button">				
 			</form>
+			<h2>Welcome {{ user['first_name'] }}</h2>
 		</header>
 		<div id='main_content'>
+			<h3>Post a Message</h3>
 			<form action="/add_message/{{ user['id'] }}" method="POST">
-				<h3><label for="message">Post a message</label></h3>
 				<textarea name="message" id="message"></textarea>
-				<input type="submit" value="Post a Message" id="message_button">				
+				<input type="submit" value="Post a Message" class="post_button">				
 			</form>
 			{% if messages %}
 				{% for message in messages %}
 					<section class='message'>
-						<h3>{{ message['name_and_date'] }}<h3>
+						<h3>{{ message['name_and_date'] }}</h3>
+						{% if message['user_id'] == user['id'] %}
+							<form action="/delete_message/{{ message['id'] }}" method="POST">
+								<input type="submit" value="DELETE" class="delete_button">		
+							</form>
+						{% endif %}
 						<p>{{ message['message'] }}</p>
 					</section>
-					<section class='comment'>
 					{% if comments %}
 						{% for comment in comments %}
 							{% if message['id'] == comment['message_id'] %}
-								<h3>{{ comment['name_and_date'] }}<h3>
+							<section class='comment'>
+								<h3>{{ comment['name_and_date'] }}</h3>
+								{% if comment['user_id'] == user['id'] %}
+									<form action="/delete_comment/{{ comment['id'] }}" method="POST">
+										<input type="submit" value="DELETE" class="delete_button">		
+									</form>
+								{% endif %}
 								<p>{{ comment['comment'] }}</p>
+							</section>
 							{% endif %}
 						{% endfor %}
 					{% endif %}
-						<h3>Post a comment</h3>
+					<section class='post_comment'>
+						<h3>Post a Comment</h3>
 						<form action="/add_comment/{{ message['id'] }}/{{ user['id'] }}" method="POST">
-							<textarea name="comment" id="comment"></textarea>
-							<input type="submit" value="Post a Comment" id="comment_button">			
+							<textarea name="comment" id="{{ message['id'] }}"></textarea>
+							<input type="submit" value="Post a Comment" class="post_button">			
 						</form>
 					</section>
-
 				{% endfor %}
 			{% endif %}
 		</div>
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+					<div id="footer"><p class="warning">{{ message }}</p></div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
 	</div>
+	<script type="text/javascript">
+		document.getElementById('message').value = "{{ session['message'] }}";
+		{% if messages %}
+			{% for message in messages %}
+			document.getElementById("{{ message['id'] }}").value = "{{ session['comment'] }}";
+			{% endfor %}
+		{% endif %}
+	</script>
 </body>
 </html>

@@ -36,7 +36,7 @@ CREATE TABLE `comments` (
   KEY `fk_comments_users1_idx` (`user_id`),
   CONSTRAINT `fk_comments_messages1` FOREIGN KEY (`message_id`) REFERENCES `messages` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_comments_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,'hi!','2016-07-07 19:54:39','2016-07-07 19:54:39',1,1),(2,'lol why you laughing?','2016-07-07 19:55:19','2016-07-07 19:55:19',2,1),(3,'Okay bro','2016-07-07 20:12:03','2016-07-07 20:12:03',4,2);
+INSERT INTO `comments` VALUES (26,'Sed laoreet bibendum est lacinia auctor. Pellentesque id leo lectus. Aliquam dictum viverra dignissim. Nam a tellus velit. Nulla tortor dui, auctor ac ante eget, tempor facilisis mauris. Pellentesque blandit ligula sed purus faucibus lobortis. Pellentesque non sapien at eros dapibus euismod. Donec fringilla purus eget eros imperdiet luctus non fermentum nunc. Vestibulum mi nunc, laoreet sed tincidunt a, venenatis vel massa. Quisque non erat vehicula, molestie ante at, porttitor justo.','2016-07-08 00:32:47','2016-07-08 00:32:47',25,2),(27,'<h3>Post a Message</h3>','2016-07-08 00:43:05','2016-07-08 00:43:05',25,2),(28,'dfasgwasadf','2016-07-08 00:46:21','2016-07-08 00:46:21',28,2),(29,'sdfwgdfsdf','2016-07-08 01:19:16','2016-07-08 01:19:16',28,1),(30,'ddddsdfsdfdsfdsf','2016-07-08 01:37:33','2016-07-08 01:37:33',26,1),(33,'Sed laoreet bibendum est lacinia auctor. Pellentesque id leo lectus. Aliquam dictum viverra dignissim. Nam a tellus velit. Nulla tortor dui, auctor ac ante eget, tempor facilisis mauris. Pellentesque blandit ligula sed purus faucibus lobortis. Pellentesque non sapien at eros dapibus euismod. Donec fringilla purus eget eros imperdiet luctus non fermentum nunc. Vestibulum mi nunc, laoreet sed tincidunt a, venenatis vel massa. Quisque non erat vehicula, molestie ante at, porttitor justo.','2016-07-08 02:11:29','2016-07-08 02:11:29',26,3),(34,'YEAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH','2016-07-08 02:12:41','2016-07-08 02:12:41',29,3);
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +65,7 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`id`),
   KEY `fk_messages_users_idx` (`user_id`),
   CONSTRAINT `fk_messages_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (1,'Hello, All of you!','2016-07-07 18:43:14','2016-07-07 18:43:14',1),(2,'lol okay','2016-07-07 18:43:44','2016-07-07 18:43:44',1),(3,'This is 3rd message','2016-07-07 18:56:34','2016-07-07 18:56:34',1),(4,'This is my 4th message','2016-07-07 19:27:15','2016-07-07 19:27:15',1);
+INSERT INTO `messages` VALUES (25,'Sed laoreet bibendum est lacinia auctor. Pellentesque id leo lectus. Aliquam dictum viverra dignissim. Nam a tellus velit. Nulla tortor dui, auctor ac ante eget, tempor facilisis mauris. Pellentesque blandit ligula sed purus faucibus lobortis. Pellentesque non sapien at eros dapibus euismod. Donec fringilla purus eget eros imperdiet luctus non fermentum nunc. Vestibulum mi nunc, laoreet sed tincidunt a, venenatis vel massa. Quisque non erat vehicula, molestie ante at, porttitor justo.','2016-07-08 00:32:41','2016-07-08 00:32:41',2),(26,'tor ac ante eget, tempor facilisis mauris. Pellentesque blandit ligula sed purus faucibus lobortis. Pellentesque non sapien at eros dapibus euismod. Donec fringilla purus eget eros imperdiet luctus non fe','2016-07-08 00:43:20','2016-07-08 00:43:20',2),(28,'Hello, My name is Tommy Oh. Nice to meet you all. Yolo.','2016-07-08 00:45:48','2016-07-08 00:45:48',2),(29,'Sed laoreet bibendum est lacinia auctor. Pellentesque id leo lectus. Aliquam dictum viverra dignissim. Nam a tellus velit. Nulla tortor dui, auctor ac ante eget, tempor facilisis mauris. Pellentesque blandit ligula sed purus faucibus lobortis. Pellentesque non sapien at eros dapibus euismod. Donec fringilla purus eget eros imperdiet luctus non fermentum nunc. Vestibulum mi nunc, laoreet sed tincidunt a, venenatis vel massa. Quisque non erat vehicula, molestie ante at, porttitor justo.','2016-07-08 01:43:30','2016-07-08 01:43:30',1),(30,'Sed laoreet bibendum est lacinia auctor. Pellentesque id leo lectus. Aliquam dictum viverra dignissim. Nam a tellus velit. Nulla tortor dui, auctor ac ante eget, tempor facilisis mauris. Pellentesque blandit ligula sed purus faucibus lobortis. Pellentesque non sapien at eros dapibus euismod. Donec fringilla purus eget eros imperdiet luctus non fermentum nunc. Vestibulum mi nunc, laoreet sed tincidunt a, venenatis vel massa. Quisque non erat vehicula, molestie ante at, porttitor justo.','2016-07-08 02:11:14','2016-07-08 02:11:14',3);
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `users` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Tommy','Oh','tommy@dojo.com','$2b$12$JsarV5tBABdls/1UHYGa4ubeD52stkgT6au9UhRCFZA2LyMGSCcjK','2016-07-07 18:10:34','2016-07-07 18:10:34'),(2,'Munchies','Burrito','surfnturf@gmail.com','$2b$12$7BvGItTjYWkyycUUROWjn.oAQvlqcbnZBHbIAvEFx6CzT6HQq/ujK','2016-07-07 20:11:51','2016-07-07 20:11:51');
+INSERT INTO `users` VALUES (1,'Tommy','Oh','tommy@dojo.com','$2b$12$JsarV5tBABdls/1UHYGa4ubeD52stkgT6au9UhRCFZA2LyMGSCcjK','2016-07-07 18:10:34','2016-07-07 18:10:34'),(2,'Munchies','Burrito','surfnturf@gmail.com','$2b$12$7BvGItTjYWkyycUUROWjn.oAQvlqcbnZBHbIAvEFx6CzT6HQq/ujK','2016-07-07 20:11:51','2016-07-07 20:11:51'),(3,'Meow','Ninja','ninja@dojo.com','$2b$12$UY8.zLLdTgwlXbpGN828O.pSUYOOO77E5c9yId686Y5GzJoVN0UtW','2016-07-08 02:11:06','2016-07-08 02:11:06');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -116,4 +116,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-07 20:28:40
+-- Dump completed on 2016-07-08  2:23:56

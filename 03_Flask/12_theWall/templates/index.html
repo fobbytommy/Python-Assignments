@@ -42,14 +42,9 @@
 		    }); 
 	    }); 
   	</script>
-  	<style type="text/css">
-  		#tabs{
-  			width: 275px;
-  		}
-  	</style>
 </head>
 <body>
-	<div id='wrapper'>
+	<div id='wrapper_index'>
 		<div id="tabs">
 			<ul>
 				<li><a href="#tabs-1">Login</a></li>
@@ -66,7 +61,7 @@
 				{% with messages = get_flashed_messages(category_filter=["login_error"]) %}
 					{% if messages %}
 						{% for message in messages %}
-							<p class="message">{{ message }}</p>	
+							<p class="check_message">{{ message }}</p>	
 						{% endfor %}
 					{% endif %}
 				{% endwith %}
@@ -85,7 +80,7 @@
 				{% with messages = get_flashed_messages(category_filter=["register_error"]) %}
 					{% if messages %}
 						{% for message in messages %}
-							<p class="message">{{ message }}</p>	
+							<p class="check_message">{{ message }}</p>	
 						{% endfor %}
 					{% endif %}
 				{% endwith %}				

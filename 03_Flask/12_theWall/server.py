@@ -92,10 +92,10 @@ def wall():
 	data = { 'id': session['id'] }
 	user = mysql.query_db(select_query, data)
 
-	get_messages = "SELECT messages.id, CONCAT(users.first_name,' ', users.last_name,' - ' ,DATE_FORMAT(messages.created_at, '%M %D %Y %r')) AS name_and_date, messages.message FROM messages JOIN users ON messages.user_id = users.id ORDER BY messages.created_at DESC"
+	get_messages = "SELECT messages.id, messages.user_id, CONCAT(users.first_name,' ', users.last_name,' - ' ,DATE_FORMAT(messages.created_at, '%M %D %Y %r')) AS name_and_date, messages.message FROM messages JOIN users ON messages.user_id = users.id ORDER BY messages.created_at DESC"
 	messages = mysql.query_db(get_messages)
 
-	get_comments = "SELECT comments.id, comments.message_id, CONCAT(users.first_name,' ', users.last_name,' - ' , DATE_FORMAT(comments.created_at, '%M %D %Y %r')) AS name_and_date, comments.comment FROM comments JOIN users ON comments.user_id = users.id ORDER BY comments.created_at"
+	get_comments = "SELECT comments.id, comments.message_id, comments.user_id, CONCAT(users.first_name,' ', users.last_name,' - ' , DATE_FORMAT(comments.created_at, '%M %D %Y %r')) AS name_and_date, comments.comment FROM comments JOIN users ON comments.user_id = users.id ORDER BY comments.created_at"
 	comments = mysql.query_db(get_comments)
 
 	return render_template('wall.html', user = user[0], messages = messages, comments = comments)
@@ -108,17 +108,52 @@ def log_off():
 @app.route('/add_message/<user_id>', methods=['POST'])
 def add_message(user_id):
 	session['message'] = request.form['message']
-	insert_query = "INSERT INTO messages (message, user_id, created_at, updated_at) VALUES (:message, :user_id, NOW(), NOW())"
-	insert_data = { 'message': str(session['message']), 'user_id': user_id }
-	mysql.query_db(insert_query, insert_data)
-	return redirect('/wall')
+	if len(str(session['message'])) < 50:
+		flash('Your message is too short! Keep it over 50 characters! That was {}!'.format(len(str(session['message']))))
+		return redirect('/wall')
+	elif len(str(session['message'])) > 500:
+		flash('Your message is too long! Keep it under 500 characters! That was {}!'.format(len(str(session['message']))))
+		return redirect('/wall')
+	else:
+		insert_query = "INSERT INTO messages (message, user_id, created_at, updated_at) VALUES (:message, :user_id, NOW(), NOW())"
+		insert_data = { 'message': str(session['message']), 'user_id': user_id }
+		mysql.query_db(insert_query, insert_data)
+		session.pop('message')
+		return redirect('/wall')
 
 @app.route('/add_comment/<message_id>/<user_id>', methods=['POST'])
 def add_comment(message_id, user_id):
 	session['comment'] = request.form['comment']
-	insert_query = "INSERT INTO comments (comment, message_id, user_id, created_at, updated_at) VALUES (:comment, :message_id, :user_id, NOW(), NOW())"
-	insert_data = { 'comment': str(session['comment']), 'message_id': message_id, 'user_id': user_id }
-	mysql.query_db(insert_query, insert_data)
+	if len(str(session['comment'])) < 10:
+		flash('Your comment is too short! Keep it over 10 characters! That was {}!'.format(len(str(session['comment']))))
+		return redirect('/wall')
+	elif len(str(session['comment'])) > 500:
+		flash('Your comment is too long! Keep it under 500 characters! That was {}!'.format(len(str(session['comment']))))
+		return redirect('/wall')
+	else:
+		insert_query = "INSERT INTO comments (comment, message_id, user_id, created_at, updated_at) VALUES (:comment, :message_id, :user_id, NOW(), NOW())"
+		insert_data = { 'comment': str(session['comment']), 'message_id': message_id, 'user_id': user_id }
+		mysql.query_db(insert_query, insert_data)
+		session.pop('comment')
+		return redirect('/wall')
+
+@app.route('/delete_message/<message_id>', methods=['POST'])
+def delete_message(message_id):
+	check_query = "SELECT id FROM comments where message_id = :message_id"
+	data = { 'message_id': message_id }
+	check_comments = mysql.query_db(check_query, data)
+	if not check_comments:
+		delete_query = "SET FOREIGN_KEY_CHECKS=0; DELETE FROM messages WHERE messages.id = :message_id AND DATE_ADD(messages.created_at, INTERVAL 30 MINUTE) > NOW(); SET FOREIGN_KEY_CHECKS=1;"
+		mysql.query_db(delete_query, data)
+	else:
+		delete_query = "SET FOREIGN_KEY_CHECKS=0; DELETE messages, comments FROM messages INNER JOIN comments WHERE messages.id = comments.message_id AND messages.id = :message_id AND DATE_ADD(messages.created_at, INTERVAL 30 MINUTE) > NOW(); SET FOREIGN_KEY_CHECKS=1;"
+		mysql.query_db(delete_query, data)
 	return redirect('/wall')
 
+@app.route('/delete_comment/<comment_id>', methods=['POST'])
+def delete_comment(comment_id):
+	delete_query = "SET FOREIGN_KEY_CHECKS=0; DELETE FROM comments WHERE id = :comment_id AND DATE_ADD(created_at, INTERVAL 30 MINUTE) > NOW(); SET FOREIGN_KEY_CHECKS=1;"
+	delete_data = { 'comment_id': comment_id }
+	mysql.query_db(delete_query, delete_data)
+	return redirect('/wall')
 app.run(debug=True)
